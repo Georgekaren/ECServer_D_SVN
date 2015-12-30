@@ -119,7 +119,7 @@ public abstract class AbstractSrvOrderManager {
      */ 
     public void dictToBO(DynamicDict aDict) throws AppException {
         if (aDict.get("orderId") != null && !"".equals(aDict.get("prodId"))) {
-            this.setProdId((String) aDict.getValueByName("orderId"));
+            this.setOrderId((String) aDict.getValueByName("orderId"));
         }
         if (aDict.get("prodId") != null && !"".equals(aDict.get("prodId"))) {
             this.setProdId((String) aDict.getValueByName("prodId"));
