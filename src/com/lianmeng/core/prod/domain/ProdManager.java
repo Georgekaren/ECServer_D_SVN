@@ -41,7 +41,7 @@ public class ProdManager extends AbstractProdManager {
     @Override
     public int add() throws AppException {
 
-        this.prodManagerDAO.selectById("");
+        this.prodManagerDAO.insert(this);
         logger.info("WWWWWWWWWWWWWWWWWWWWWW");
         return 0;
     }
@@ -50,5 +50,7 @@ public class ProdManager extends AbstractProdManager {
     public HashMap<String, String> qryProdDataById() throws AppException {
         return this.prodManagerDAO.selectById("");
     }
+    
+   
 
 }

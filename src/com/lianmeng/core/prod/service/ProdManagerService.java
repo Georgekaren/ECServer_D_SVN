@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import com.lianmeng.core.framework.bo.server.DynamicDict;
 import com.lianmeng.core.framework.bo.server.IAction;
 import com.lianmeng.core.framework.exceptions.AppException;
+import com.lianmeng.core.framework.rest.app.util.ServiceObjectToJsonUtil;
 import com.lianmeng.core.prod.domain.ProdManager;
 
 /** 
@@ -19,6 +20,7 @@ import com.lianmeng.core.prod.domain.ProdManager;
  */
 public class ProdManagerService implements IAction {
 
+    
     /**
      * prodManager <br>
      */
@@ -34,6 +36,12 @@ public class ProdManagerService implements IAction {
         if (StringUtils.equals(action, "QRY")) {
             aDict.set("DATA_INFO", this.prodManager.qryProdDataById());
         }
+        else if (StringUtils.equals(action, "ADDORDER")) {
+
+            this.prodManager.add();
+        }
+        aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "prod");
+        
 
         return 0;
     }
