@@ -326,6 +326,73 @@ public class BaseJdbcSupport implements InitializingBean {
     }
 
     /**
+     * Description: <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param seqSql String
+     * @return <br>
+     */ 
+    public long getSeq(String seqSql) {
+        String insql = "select nextval('" + seqSql + "') SEQ ";
+        return this.jdbcTemplate.queryForLong(insql);
+    }
+    
+    /**
+     * Description: <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param sql String
+     * @param paramList ArrayList<String>
+     * @return <br>
+     */ 
+    @SuppressWarnings("unchecked")
+    public HashMap<String, String> queryForMap(String sql, ArrayList<String> paramList) {
+        return (HashMap<String, String>) this.jdbcTemplate.queryForMap(sql, paramList.toArray());
+    }
+    
+    /**
+     * Description: <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param sql String
+     * @param paramList ArrayList<String>
+     * @return <br>
+     */ 
+    @SuppressWarnings("unchecked")
+    public HashMap<String, String> query(String sql, ArrayList<String> paramList) {
+        return (HashMap<String, String>) this.jdbcTemplate.queryForMap(sql, paramList.toArray());
+    }
+    
+    /**
+     * Description: <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param sql String
+     * @param paramList ArrayList<String>
+     * @return <br>
+     */ 
+    public int queryForInt(String sql, ArrayList<String> paramList) {
+        return  this.jdbcTemplate.queryForInt(sql, paramList.toArray());
+    }
+    
+    /**
+     * Description: <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param sql String
+     * @param paramList ArrayList<String>
+     * @return <br>
+     */ 
+    public long queryForLong(String sql, ArrayList<String> paramList) {
+        return  this.jdbcTemplate.queryForLong(sql, paramList.toArray());
+    }
+    
+    /**
      * Description: <br>
      * 
      * @author XXX<br>
@@ -337,6 +404,10 @@ public class BaseJdbcSupport implements InitializingBean {
     @SuppressWarnings({"unchecked", "rawtypes"})
     public ArrayList<HashMap<String, String>> queryList(String sql, ArrayList<String> paramList) {
         ArrayList<HashMap<String, String>> chgli = new ArrayList<HashMap<String, String>>();
+        logger.info(sql);
+        for (int i = 0; i < paramList.size(); i++) {
+            logger.info(paramList.get(i));
+        }
         ArrayList rtnList = (ArrayList) this.jdbcTemplate.queryForList(sql, paramList.toArray());
         for (int i = 0; i < rtnList.size(); i++) {
             if (rtnList.get(i) instanceof ListOrderedMap) {

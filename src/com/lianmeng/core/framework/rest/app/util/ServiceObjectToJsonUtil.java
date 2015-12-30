@@ -44,6 +44,17 @@ public class ServiceObjectToJsonUtil {
      * 字符集设置<br>
      */
     public static final String LOCAL_CHARSET = "UTF-8";
+    
+    /**
+     * RESPONSE <br>
+     */
+    public static final String RESPONSE_CODE = "response";
+    
+    /**
+     * BEGIN_TIME_LONG <br>
+     */
+    public static final long BEGIN_TIME_LONG = 1335189632954L;
+
     /**
      * 
      * DynamicDict转换成JSON <br> 
