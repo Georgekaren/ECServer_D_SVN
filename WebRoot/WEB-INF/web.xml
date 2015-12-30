@@ -349,6 +349,14 @@
    	 <url-pattern>/BusiServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  		<servlet-name>LoginInServlet</servlet-name>
+      <servlet-class>com.lianmeng.core.framework.web.LoginServlet</servlet-class>
+    </servlet>
+  <servlet-mapping>
+   	 <servlet-name>LoginInServlet</servlet-name>
+   	 <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
   <context-param>  
   <param-name>contextConfigLocation</param-name>  
   <param-value>/WEB-INF/config/spring*.xml</param-value>  

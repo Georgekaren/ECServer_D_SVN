@@ -9,4 +9,24 @@
     <property name="prodManagerDAO" ref="prodManagerDAO" ></property>
 </bean>
 
+<bean id="versionManager" class="com.lianmeng.core.version.domain.VersionManager" >
+    <property name="versionManagerDAO" ref="versionManagerDAO" ></property>
+</bean>
+
+<bean id="homeManager" class="com.lianmeng.extend.lianmeng.home.domain.HomeManager" >
+    <property name="homeManagerDAO" ref="homeManagerDAO" ></property>
+</bean>
+
+<bean id="extProdManager" class="com.lianmeng.extend.lianmeng.extprod.domain.ExtProdManager" >
+    <property name="extProdManagerDAO" ref="extProdManagerDAO" ></property>
+</bean>
+
+<bean id="srvOrderManager" class="com.lianmeng.core.srv.domain.SrvOrderManager" >
+    <property name="srvOrderManagerDAO" ref="srvOrderManagerDAO" ></property>
+</bean>
+
+<bean id="userManager" class="com.lianmeng.core.user.domain.UserManager" >
+    <property name="userManagerDAO" ref="userManagerDAO" ></property>
+</bean>
+
 </beans>

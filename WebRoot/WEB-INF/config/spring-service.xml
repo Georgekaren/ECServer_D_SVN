@@ -9,4 +9,25 @@
     <property name="prodManager" ref="prodManager" ></property>
 </bean>
 
+<bean id="versionManagerService" class="com.lianmeng.core.version.service.VersionManagerService" >
+    <property name="versionManager" ref="versionManager" ></property>
+</bean>
+
+<bean id="homeManagerService" class="com.lianmeng.extend.lianmeng.home.service.HomeManagerService" >
+    <property name="homeManager" ref="homeManager" ></property>
+</bean>
+
+<bean id="extProdManagerService" class="com.lianmeng.extend.lianmeng.extprod.service.ExtProdManagerService" >
+    <property name="extProdManager" ref="extProdManager" ></property>
+</bean>
+
+<bean id="srvOrderManagerService" class="com.lianmeng.core.srv.service.SrvOrderManagerService" >
+    <property name="srvOrderManager" ref="srvOrderManager" ></property>
+</bean>
+
+<bean id="userManagerService" class="com.lianmeng.core.user.service.UserManagerService" >
+    <property name="userManager" ref="userManager" ></property>
+</bean>
+
+
 </beans>
