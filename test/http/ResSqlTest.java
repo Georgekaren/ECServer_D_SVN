@@ -29,10 +29,10 @@ public class ResSqlTest {
      * @taskId <br>
      * @param args <br>
      */
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         qryContent();
 
-    }*/
+    }
 
     /**
      * Description: <br>
@@ -46,14 +46,39 @@ public class ResSqlTest {
         // String sqlcontent = "select * from rim_migrate_prod where proj_id='000000000000000000041267'  ";
         // sqlcontent = xmlParseConvert(sqlcontent);
         urlNew = "http://localhost:8080/ECServer_D/BusiServlet";
+        urlNew = "http://localhost:8080/ECServer_D/LoginServlet";
         urlNew = "http://localhost:8080/ECServer_D/lianmeng-service/rest/lianmeng/postJsonService";
         String QryPingContent = "{'ServiceName':'IC_IM_DIVERSION_QRY_CITY' , Data:[]}";
         QryPingContent = "{\"ServiceName\":\"testJdbcSu\" , \"Data\":{\"PROJ_ORD_NO\":\"CR201512180464\"}}";
-        QryPingContent = "{\"ServiceName\":\"prodManagerService\" , \"Data\":{\"ACTION\":\"QRY\"}}";
-
+        QryPingContent = "{\"ServiceName\":\"prodManagerService\" , \"Data\":{\"ACTION\":\"QRY\",\"ID\":\"1\"}}";
+        QryPingContent = "{\"ServiceName\":\"versionManagerService\" , \"Data\":{\"ACTION\":\"QRY\",\"ID\":\"1\"}}";
+        QryPingContent = "{\"ServiceName\":\"homeManagerService\" , \"Data\":{\"ACTION\":\"QRY\",\"ID\":\"1\"}}";
+        QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"QRYLIMITPROD\"}}";
+        QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"QRYPRODDETAIL\",\"id\":\"1\"}}";
+        QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"QRYBASECONTENTPROD\",\"prodNew\":\"true\"}}";
+        QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"QRYPRODTYPELIST\"}}";
+      //  QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"QRYBASECONTENTANDCOLORPROD\",\"type\":\"1001\"
+        //,\"ordertype\":\"sale_down\",\"brandid\":\"1002001\"}}";
+        QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"QRYPRODFINALSLIST\",\"finalkeyword\":\"SUBBRAND\"}}";
+        
+        QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"QRYBASECONTENTPROD\",\"name\":\"苹果\"}}";
+        QryPingContent = "{\"ServiceName\":\"srvOrderManagerService\" , \"Data\":{\"ACTION\":\"ADDORDER\",\"prodId\":\"3\",\"userId\":\"1\",\"prodNum\":\"1\",\"totalPrice\":\"13\"}}";
+      //  QryPingContent = "{\"ServiceName\":\"srvOrderManagerService\" , \"Data\":{\"ACTION\":\"QRYBASEORDER\",\"userId\":\"1\"}}";
+       // 
+        QryPingContent = "{\"ServiceName\":\"srvOrderManagerService\" , \"Data\":{\"ACTION\":\"MODIFYORDER\",\"prodId\":\"3\",\"userId\":\"1\",\"prodNum\":\"2\",\"totalPrice\":\"13\"}}";
+        QryPingContent = "{\"ServiceName\":\"srvOrderManagerService\" , \"Data\":{\"ACTION\":\"REMOVEORDER\",\"prodId\":\"3\",\"userId\":\"1\"}}";
+        
+        //QRYUSER
+        QryPingContent = "{\"ServiceName\":\"userManagerService\" , \"Data\":{\"ACTION\":\"QRYUSER\",\"name\":\"11\",\"password\":\"123\"}}";
+     //   QryPingContent = "{\"ServiceName\":\"userManagerService\" , \"Data\":{\"ACTION\":\"ADDUSER\",\"name\":\"123\",\"password\":\"1234\",\"telephone\":\"1232\"}}";
+     //   QryPingContent = "{\"ServiceName\":\"userManagerService\" , \"Data\":{\"ACTION\":\"DELUSER\",\"id\":\"1002\"}}";
+        QryPingContent = "{\"ServiceName\":\"srvOrderManagerService\" , \"Data\":{\"ACTION\":\"QRYHASORDER\",\"userId\":\"1\"}}";
+        // 
+        
+        
         String sr = "";
         sr = HttpRequest.sendPost(urlNew, QryPingContent);
-      //  System.out.println(sr);
+        System.out.println(sr);
     }
 
    
