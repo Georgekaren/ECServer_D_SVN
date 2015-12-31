@@ -30,9 +30,23 @@ public class AddressManagerDAOMysqlImpl extends AddressManagerDAO {
     public void insert(AbstractAddressManager paramT) throws AppException {
         ArrayList<String> array = new ArrayList<String>();
         StringBuffer sBuffer = new StringBuffer();
-        sBuffer.append(" insert into Im_address(id) ");
-        sBuffer.append(" values(?) ");
+        sBuffer.append(" insert into Im_address(id,user_id,name,tele_no,fixed_tele_no,province_id,city_id,area_id,detail,"); 
+        sBuffer.append(" zipcode,is_default,level,position,note,del_state,create_date) ");
+        sBuffer.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,'0',now()) ");
         array.add(paramT.getId());
+        array.add(paramT.getUserId());
+        array.add(paramT.getName());
+        array.add(paramT.getTeleNo());
+        array.add(paramT.getFixedTelNo());
+        array.add(paramT.getProvinceId());
+        array.add(paramT.getCityId());
+        array.add(paramT.getAreaId());
+        array.add(paramT.getDetail());
+        array.add(paramT.getZipCode());
+        array.add(paramT.getIsDefault());
+        array.add(paramT.getLevel());
+        array.add(paramT.getPosition());
+        array.add(paramT.getNote());
         this.update(sBuffer.toString(), array);
     }
 
@@ -40,7 +54,58 @@ public class AddressManagerDAOMysqlImpl extends AddressManagerDAO {
     public int update(AbstractAddressManager paramT) throws AppException {
         ArrayList<String> array = new ArrayList<String>();
         StringBuffer sBuffer = new StringBuffer();
-      
+        sBuffer.append("update Im_address a set a.modify_user = ?, a.modify_date = NOW() ");
+        array.add(paramT.getUserId());
+        if (paramT.getName() != null && !"".equals(paramT.getName())) {
+            sBuffer.append(",a.name = ? ");
+            array.add(paramT.getName());
+        }
+        if (paramT.getTeleNo() != null && !"".equals(paramT.getTeleNo())) {
+            sBuffer.append(",a.tele_no = ? ");
+            array.add(paramT.getTeleNo());
+        }
+        if (paramT.getFixedTelNo() != null && !"".equals(paramT.getFixedTelNo())) {
+            sBuffer.append(",a.fixed_tele_no = ? ");
+            array.add(paramT.getFixedTelNo());
+        }
+        if (paramT.getProvinceId() != null && !"".equals(paramT.getProvinceId())) {
+            sBuffer.append(",a.province_id = ? ");
+            array.add(paramT.getProvinceId());
+        }
+        if (paramT.getCityId() != null && !"".equals(paramT.getCityId())) {
+            sBuffer.append(",a.city_id = ? ");
+            array.add(paramT.getCityId());
+        }
+        if (paramT.getAreaId() != null && !"".equals(paramT.getAreaId())) {
+            sBuffer.append(",a.area_id = ? ");
+            array.add(paramT.getAreaId());
+        }
+        if (paramT.getDetail() != null && !"".equals(paramT.getDetail())) {
+            sBuffer.append(",a.detail = ? ");
+            array.add(paramT.getDetail());
+        }
+        if (paramT.getZipCode() != null && !"".equals(paramT.getZipCode())) {
+            sBuffer.append(",a.zipcode = ? ");
+            array.add(paramT.getZipCode());
+        }
+        if (paramT.getIsDefault() != null && !"".equals(paramT.getIsDefault())) {
+            sBuffer.append(",a.is_default = ? ");
+            array.add(paramT.getIsDefault());
+        }
+        if (paramT.getLevel() != null && !"".equals(paramT.getLevel())) {
+            sBuffer.append(",a.level = ? ");
+            array.add(paramT.getLevel());
+        }
+        if (paramT.getPosition() != null && !"".equals(paramT.getPosition())) {
+            sBuffer.append(",a.position = ? ");
+            array.add(paramT.getPosition());
+        }
+        if (paramT.getNote() != null && !"".equals(paramT.getNote())) {
+            sBuffer.append(",a.note = ? ");
+            array.add(paramT.getNote());
+        }
+        sBuffer.append(" where id = ? and del_state = '0' ");
+        array.add(paramT.getId());
         return this.update(sBuffer.toString(), array);
     }
 
@@ -63,7 +128,9 @@ public class AddressManagerDAOMysqlImpl extends AddressManagerDAO {
     @Override
     public HashMap<String, String> selectById(String paramString) throws AppException {
         ArrayList<String> array = new ArrayList<String>();
-        ArrayList<HashMap<String, String>> rtnList = (ArrayList<HashMap<String, String>>) this.queryList("select now() ", array);
+        String sql = "select * from Im_address where id = ? and del_state = '0' ";
+        array.add(paramString);
+        ArrayList<HashMap<String, String>> rtnList = (ArrayList<HashMap<String, String>>) this.queryList(sql, array);
         return rtnList.get(0);
     }
     
