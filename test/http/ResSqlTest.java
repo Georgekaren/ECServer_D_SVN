@@ -74,7 +74,25 @@ public class ResSqlTest {
      //   QryPingContent = "{\"ServiceName\":\"userManagerService\" , \"Data\":{\"ACTION\":\"DELUSER\",\"id\":\"1002\"}}";
         QryPingContent = "{\"ServiceName\":\"srvOrderManagerService\" , \"Data\":{\"ACTION\":\"QRYHASORDER\",\"userId\":\"1\"}}";
         // 
+        QryPingContent = "{\"ServiceName\":\"payOrderManagerService\" , \"Data\":{\"ACTION\":\"MIMPAYORDERLIST\",\"userId\":\"1\",\"orderNo\":\"1231121\",\"channel\":\"alipay\",\"amount\":\"30\"}}";
         
+        QryPingContent = "{\"ServiceName\":\"addressManagerService\" , \"Data\":{\"ACTION\":\"QRYADDRESSLIST\",\"userId\":\"1\"}}";
+        QryPingContent = "{\"ServiceName\":\"addressManagerService\" , \"Data\":{\"ACTION\":\"ADDADDRESS\",\"userId\":\"1\"" +
+        		",\"id\":\"1\",\"name\":\"1\",\"teleNo\":\"111\",\"fixedTelNo\":\"1\",\"provinceId\":\"43\",\"cityId\":\"6\",\"areaId\":\"82\"" +
+        		",\"detail\":\"1\",\"zipCode\":\"410000\",\"isDefault\":\"1\",\"level\":\"4\",\"position\":\"1\",\"note\":\"1\"}}";
+        QryPingContent = "{\"ServiceName\":\"addressManagerService\" , \"Data\":{\"ACTION\":\"MODIFYADDRESS\",\"userId\":\"1\"" +
+            ",\"id\":\"1002\",\"name\":\"荷花\",\"teleNo\":\"111\",\"fixedTelNo\":\"1\",\"provinceId\":\"43\",\"cityId\":\"6\",\"areaId\":\"82\"" +
+            ",\"detail\":\"1\",\"zipCode\":\"410000\",\"isDefault\":\"1\",\"level\":\"4\",\"position\":\"1\",\"note\":\"1\"}}";
+  
+        QryPingContent = "{\"ServiceName\":\"addressManagerService\" , \"Data\":{\"ACTION\":\"REMOVEADDRESS\",\"userId\":\"1\",\"id\":\"1011\"}}";
+        QryPingContent = "{\"ServiceName\":\"addressManagerService\" , \"Data\":{\"ACTION\":\"MODIFYDEFAULT\",\"userId\":\"1\",\"id\":\"1012\",\"isDefault\":\"1\"}}";
+        QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"QRYBASEFAVORITEPROD\",\"userId\":\"1\"}}";
+      //  QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"MIMREMOVEFAVORITEPROD\",\"userId\":\"1\",\"id\":\"1\"}}";
+      // QryPingContent = "{\"ServiceName\":\"extProdManagerService\" , \"Data\":{\"ACTION\":\"MIMADDFAVORITEPROD\",\"userId\":\"1\",\"id\":\"2\"}}";
+        QryPingContent = "{\"ServiceName\":\"srvOrderManagerService\" , \"Data\":{\"ACTION\":\"QRYHASPAYORDERDETAIL\",\"userId\":\"1\",\"orderNo\":\"201512272020334441\",\"prodId\":[\"219\",\"220\"]}}";
+        QryPingContent = "{\"ServiceName\":\"payOrderManagerService\" , \"Data\":{\"ACTION\":\"MIMPAYORDERLIST\",\"userId\":\"1\",\"prodId\":[\"2\",\"3\",],\"channel\":\"alipay\",\"amount\":\"3\"}}";
+        
+        QryPingContent = "{\"ServiceName\":\"addressManagerService\" , \"Data\":{\"ACTION\":\"QRYADDRESSLIST\",\"userId\":\"1\"}}";
         
         String sr = "";
         sr = HttpRequest.sendPost(urlNew, QryPingContent);
