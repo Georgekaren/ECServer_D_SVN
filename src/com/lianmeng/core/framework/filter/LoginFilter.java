@@ -1,9 +1,8 @@
 package com.lianmeng.core.framework.filter;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.Filter;
@@ -13,15 +12,17 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import com.itheima.redbaby.config.Constant;
-import com.itheima.redbaby.service.CommonUtil;
+import org.apache.log4j.Logger;
+
+import com.lianmeng.core.framework.bo.server.DynamicDict;
+import com.lianmeng.core.framework.exceptions.AppException;
+import com.lianmeng.core.framework.rest.app.util.ServiceObjectToJsonUtil;
 
 /**
  * Description: <br>
  * 
- * @author XXX<br>
+ * @author shen.zhi<br>
  * @version 8.0<br>
  * @taskId <br>
  * @CreateDate 2016-1-3 <br>
@@ -30,6 +31,10 @@ import com.itheima.redbaby.service.CommonUtil;
  */
 public class LoginFilter implements Filter {
 
+    /**
+     * logger <br>
+     */
+    private static final Logger logger = Logger.getLogger(LoginFilter.class);
     /**
      * urls <br>
      */
@@ -50,15 +55,31 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
         req.getSession();
         req.getSession().getId();
         String substring = req.getRequestURI().substring(req.getContextPath().length());
         if (urls.contains(substring)) {
             if (req.getSession().getAttribute("user") == null) {
-                Map<String, Object> outMap = new HashMap<String, Object>();
-                outMap.put(Constant.RESPONSE, "notlogin");
-                CommonUtil.renderJson(resp, outMap);
+                DynamicDict dict = new DynamicDict();
+                try {
+                    dict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "notlogin");
+                    dict.set("isSuccess", "true");
+                }
+                catch (AppException e) {
+                    try {
+                        dict.set("isSuccess", "false");
+
+                        dict.set("MsgCode", "SYS-0002");
+                        dict.set("Msg", e.getMessage());
+                    }
+                    catch (AppException e1) {
+                        logger.debug("filterErro.");
+                    }
+                }
+                String returnValue = ServiceObjectToJsonUtil.getJsonData(dict);
+                PrintWriter out = response.getWriter();
+                out.print(returnValue);
+                out.close();
                 return;
             }
         }
