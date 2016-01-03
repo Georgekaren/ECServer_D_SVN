@@ -34,7 +34,7 @@ public abstract class SrvOrderManagerDAO extends BaseJdbcDAO<AbstractSrvOrderMan
      * @return ArrayList<HashMap<String, String>>
      * @throws AppException <br>
      */ 
-    public abstract ArrayList<HashMap<String, String>> qryBaseCartOrderList(AbstractSrvOrderManager order) throws AppException;
+    public abstract ArrayList<HashMap<String, String>> qryBaseStateOrderList(AbstractSrvOrderManager order) throws AppException;
     
     /**
      * Description: 查询产品关联的促销信息<br> 
@@ -47,7 +47,7 @@ public abstract class SrvOrderManagerDAO extends BaseJdbcDAO<AbstractSrvOrderMan
      */ 
     public abstract ArrayList<HashMap<String, String>> queryProdRelaSaleList(AbstractSrvOrderManager prod) throws AppException;
     /**
-     * Description: 查询产品关联的促销信息<br> 
+     * Description: 查询用户下定单信息<br> 
      *  
      * @author XXX<br>
      * @taskId <br>
@@ -56,6 +56,17 @@ public abstract class SrvOrderManagerDAO extends BaseJdbcDAO<AbstractSrvOrderMan
      * @throws AppException <br>
      */ 
     public abstract ArrayList<HashMap<String, String>> qryHasOrderList(AbstractSrvOrderManager prod) throws AppException;
+
+    /**
+     * Description: 查询地址信息<br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param addressId String
+     * @return ArrayList<HashMap<String, String>>
+     * @throws AppException <br>
+     */ 
+    public abstract HashMap<String, String> qryAddressListById(String addressId) throws AppException;
 
     
 }

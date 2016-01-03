@@ -37,12 +37,14 @@ public class AddressManagerService implements IAction {
     public int perform(DynamicDict aDict) throws AppException {
         String action = (String) aDict.getValueByName("ACTION");
         if (StringUtils.equals(action, "QRYADDRESSLIST")) {
+            this.addressManager.dictToBO(aDict);
             aDict.set("DATA_INFO", this.addressManager.qryAddressListByUser());
         }
         else if (StringUtils.equals(action, "ADDADDRESS")) {
 
             this.addressManager.dictToBO(aDict);
             this.addressManager.add();
+            aDict.set("DATA_INFO", this.addressManager.qryAddressListByUser());
         }
         else if (StringUtils.equals(action, "REMOVEADDRESS")) {
 
@@ -53,12 +55,13 @@ public class AddressManagerService implements IAction {
 
             this.addressManager.dictToBO(aDict);
             this.addressManager.modify();
+            aDict.set("DATA_INFO", this.addressManager.qryAddressListByUser());
         }
         else if (StringUtils.equals(action, "MODIFYDEFAULT")) {
 
             this.addressManager.dictToBO(aDict);
             this.addressManager.modify();
-
+            this.addressManager.setNoDefault();
         }
 
         aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "success");

@@ -141,9 +141,25 @@ public class AddressManagerDAOMysqlImpl extends AddressManagerDAO {
     public ArrayList<HashMap<String, String>> qryAddressListByUser(AbstractAddressManager order) throws AppException {
         ArrayList<String> array = new ArrayList<String>();
         StringBuffer sbf = new StringBuffer();
-        sbf.append(" select now() ");
+        sbf.append(" select id,name,a.tele_no phonenumber,a.fixed_tele_no fixedtel,a.is_default isdefault ");
+        sbf.append(" ,a.province_id provinceid,a.city_id cityid,a.area_id areaid,a.detail areadetail,a.zipcode ");
+        sbf.append("  ,get_cant_name_by_id(a.province_id) provinceName ,get_cant_name_by_id(a.city_id) cityName");
+        sbf.append("   ,get_cant_name_by_id(a.area_id) areaName  ");
+        sbf.append("  from Im_address a where user_id= ? and a.del_state='0' ");
         array.add(order.getUserId());
         return this.queryList(sbf.toString(), array);
+    }
+
+    @Override
+    public int setNoDefault(AbstractAddressManager paramT) throws AppException {
+        ArrayList<String> array = new ArrayList<String>();
+        StringBuffer sBuffer = new StringBuffer();
+        sBuffer.append("update Im_address a set a.modify_user = ?, a.modify_date = NOW(),a.is_default = '0'  ");
+        sBuffer.append(" where id <> ? and a.user_id= ? and del_state = '0' ");
+        array.add(paramT.getUserId());
+        array.add(paramT.getId());
+        array.add(paramT.getUserId());
+        return this.update(sBuffer.toString(), array);
     }
 
 }

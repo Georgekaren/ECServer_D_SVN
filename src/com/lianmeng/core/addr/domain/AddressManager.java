@@ -61,6 +61,13 @@ public class AddressManager extends AbstractAddressManager {
     }
 
     @Override
+    public int setNoDefault() throws AppException {
+        this.addressManagerDAO.setNoDefault(this);
+        return 0;
+    }
+
+    
+    @Override
     public ArrayList<HashMap<String, String>> qryAddressListByUser() throws AppException {
         return this.addressManagerDAO.qryAddressListByUser(this);
     }

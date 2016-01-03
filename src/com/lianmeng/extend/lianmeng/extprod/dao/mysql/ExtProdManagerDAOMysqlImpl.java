@@ -251,4 +251,41 @@ public class ExtProdManagerDAOMysqlImpl extends ExtProdManagerDAO {
         return rtnList;
     }
 
+    @Override
+    public ArrayList<HashMap<String, String>> queryBaseFavoriteList(AbstractExtProdManager prod) throws AppException {
+        ArrayList<String> array = new ArrayList<String>();
+        StringBuffer sqlBuffer = new StringBuffer();
+        sqlBuffer.append(" select a.*,b.big_pic pic from srv_prod a  ");
+        sqlBuffer.append(" left join im_picture b on a.pic_id=b.id and b.del_state='0' ");
+        sqlBuffer.append(" left join Srv_prod_favorite c on c.prod_id=a.id and c.del_state='0' ");
+        sqlBuffer.append("  where  a.del_state='0' and c.user_id= ? ");
+        array.add(prod.getUserId());
+
+        ArrayList<HashMap<String, String>> rtnList = (ArrayList<HashMap<String, String>>) this.queryList(sqlBuffer.toString(), array);
+        return rtnList;
+    }
+
+    @Override
+    public int addFavorite(AbstractExtProdManager prod) throws AppException {
+        ArrayList<String> array = new ArrayList<String>();
+        StringBuffer sBuffer = new StringBuffer();
+        sBuffer.append("insert into Srv_prod_favorite (user_id,prod_id,del_state) values(?,?,'0')  ");
+        array.add(prod.getUserId());
+        array.add(prod.getProdId());
+        return this.update(sBuffer.toString(), array);
+    }
+
+    @Override
+    public int removeFavorite(AbstractExtProdManager prod) throws AppException {
+        ArrayList<String> array = new ArrayList<String>();
+        StringBuffer sBuffer = new StringBuffer();
+        sBuffer.append("update Srv_prod_favorite a set a.del_state='1',a.del_date=NOW() where user_id= ?  and del_state='0' ");
+        array.add(prod.getUserId());
+        if (prod.getProdId() != null && "".equals(prod.getProdId())) {
+            sBuffer.append("  and prod_id=?  ");
+            array.add(prod.getProdId());
+        }
+        return this.update(sBuffer.toString(), array);
+    }
+
 }

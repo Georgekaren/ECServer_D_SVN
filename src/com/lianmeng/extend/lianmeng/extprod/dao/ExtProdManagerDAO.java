@@ -101,5 +101,36 @@ public abstract class ExtProdManagerDAO extends BaseJdbcDAO<AbstractExtProdManag
      */ 
     public abstract ArrayList<HashMap<String, String>> queryBasePubsFinalList(AbstractExtProdManager prod) throws AppException;
 
-    
+    /**
+     * Description: :查询收藏的产品<br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param prod AbstractExtProdManager
+     * @return ArrayList<HashMap<String, String>>
+     * @throws AppException <br>
+     */ 
+    public abstract ArrayList<HashMap<String, String>> queryBaseFavoriteList(AbstractExtProdManager prod) throws AppException;
+
+    /**
+     * Description: :添加收藏的产品<br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param prod AbstractExtProdManager
+     * @return ArrayList<HashMap<String, String>>
+     * @throws AppException <br>
+     */ 
+    public abstract int addFavorite(AbstractExtProdManager prod) throws AppException;
+
+    /**
+     * Description: :移除收藏的产品<br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @param prod AbstractExtProdManager
+     * @return ArrayList<HashMap<String, String>>
+     * @throws AppException <br>
+     */ 
+    public abstract int removeFavorite(AbstractExtProdManager prod) throws AppException;
 }

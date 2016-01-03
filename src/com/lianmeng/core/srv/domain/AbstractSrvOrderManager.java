@@ -53,6 +53,32 @@ public abstract class AbstractSrvOrderManager {
      */
     private String isgift;
 
+    /**
+     * state <br>
+     */
+    private String state;
+    
+    /**
+     * prodIds <br>
+     */
+    private ArrayList<String> prodIds;
+    
+    public ArrayList<String> getProdIds() {
+        return prodIds;
+    }
+
+    public void setProdIds(ArrayList<String> prodIds) {
+        this.prodIds = prodIds;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getOrderId() {
         return orderId;
     }
@@ -117,11 +143,17 @@ public abstract class AbstractSrvOrderManager {
      * @param aDict DynamicDict
      * @throws AppException <br>
      */ 
+    @SuppressWarnings("unchecked")
     public void dictToBO(DynamicDict aDict) throws AppException {
         if (aDict.get("orderId") != null && !"".equals(aDict.get("prodId"))) {
             this.setOrderId((String) aDict.getValueByName("orderId"));
         }
-        if (aDict.get("prodId") != null && !"".equals(aDict.get("prodId"))) {
+        if (aDict.get("orderNo") != null && !"".equals(aDict.get("orderNo"))) {
+            this.setOrderCode((String) aDict.getValueByName("orderNo"));
+        }
+        if (aDict.get("prodId") != null) {
+            ArrayList<String> li = (ArrayList<String>) aDict.getList("prodId");
+            this.setProdIds(li);
             this.setProdId((String) aDict.getValueByName("prodId"));
         }
         if (aDict.get("userId") != null && !"".equals(aDict.get("userId"))) {
@@ -132,6 +164,9 @@ public abstract class AbstractSrvOrderManager {
         }
         if (aDict.get("totalPrice") != null && !"".equals(aDict.get("totalPrice"))) {
             this.setTotalPrice((String) aDict.getValueByName("totalPrice"));
+        }
+        if (aDict.get("state") != null && !"".equals(aDict.get("state"))) {
+            this.setState((String) aDict.getValueByName("state"));
         }
 
         if (aDict.get("isgift") != null && !"".equals(aDict.get("isgift"))) {
@@ -204,4 +239,13 @@ public abstract class AbstractSrvOrderManager {
      */ 
     public abstract ArrayList<HashMap<String, String>> qryHasOrderList() throws AppException;
 
+    /**
+     * Description: <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @return ArrayList<HashMap<String, String>>
+     * @throws AppException <br>
+     */ 
+    public abstract HashMap<String, Object> qryHasPayOrderDetailList() throws AppException;
 }

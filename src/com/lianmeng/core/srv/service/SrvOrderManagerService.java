@@ -64,30 +64,11 @@ public class SrvOrderManagerService implements IAction {
         else if (StringUtils.equals(action, "CHECKBASEORDER")) {
 
             this.srvOrderManager.dictToBO(aDict);
-            
-            HashMap<String, String> address_info = new HashMap<String, String>();
-            address_info.put("id", "11");
-            address_info.put("name", "11");
-            address_info.put("address_area", "11");
-            address_info.put("address_detail", "11");
-
-            HashMap<String, String> payment_info = new HashMap<String, String>();
-            payment_info.put("type", "1");
-
-            HashMap<String, String> delivery_info = new HashMap<String, String>();
-            delivery_info.put("type", "1");
-
-            HashMap<String, String> invoice_info = new HashMap<String, String>();
-            invoice_info.put("id", "1");
-            invoice_info.put("title", "发票标题");
-            invoice_info.put("content", "发票内容");
-
             HashMap<String, Object> ordMap = this.srvOrderManager.qryBaseCartOrderList();
-
-            aDict.set("address_info", address_info);
-            aDict.set("payment_info", payment_info);
-            aDict.set("delivery_info", delivery_info);
-            aDict.set("invoice_info", invoice_info);
+            aDict.set("address_info", ordMap.get("address_info"));
+            aDict.set("payment_info", ordMap.get("payment_info"));
+            aDict.set("delivery_info", ordMap.get("delivery_info"));
+            aDict.set("invoice_info", ordMap.get("invoice_info"));
             aDict.set("productlist", ordMap.get("productlist"));
             aDict.set("checkout_prom", ordMap.get("cart_prom"));
             aDict.set("checkout_addup", ordMap.get("cart_addup"));
@@ -109,8 +90,19 @@ public class SrvOrderManagerService implements IAction {
             aDict.set("DATA_INFO", this.srvOrderManager.qryHasOrderList());
             
         }
-       
-        
+        else if (StringUtils.equals(action, "QRYHASPAYORDERDETAIL")) {
+            this.srvOrderManager.dictToBO(aDict);
+            HashMap<String, Object> ordMap = this.srvOrderManager.qryHasPayOrderDetailList();
+            aDict.set("order_info", ordMap.get("order_info"));
+            aDict.set("address_info", ordMap.get("address_info"));
+            aDict.set("payment_info", ordMap.get("payment_info"));
+            aDict.set("delivery_info", ordMap.get("delivery_info"));
+            aDict.set("invoice_info", ordMap.get("invoice_info"));
+            aDict.set("productlist", ordMap.get("productlist"));
+            aDict.set("checkout_prom", ordMap.get("cart_prom"));
+            aDict.set("checkout_addup", ordMap.get("cart_addup"));
+            
+        }
         aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "success");
         
 

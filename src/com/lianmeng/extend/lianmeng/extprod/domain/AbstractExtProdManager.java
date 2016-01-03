@@ -69,6 +69,19 @@ public abstract class AbstractExtProdManager implements Serializable {
      */
     private String orderSeqType;
     
+    /**
+     * userId <br>
+     */
+    private String userId;
+    
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getOrderSeqType() {
         return orderSeqType;
     }
@@ -134,6 +147,23 @@ public abstract class AbstractExtProdManager implements Serializable {
     }
 
     /**
+     * Description: <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br> <br>
+     */ 
+    public void clear() {
+        this.prodId = "";
+        this.prodName = "";
+        this.prodType = "";
+        this.prodNewFlag = false;
+        this.pubsFinalId = "";
+        this.pubsFinalParentId = "";
+        this.pubsFinalKeyWord = "";
+        this.orderSeqType = "";
+        this.userId = "";
+    }
+    /**
      * Description:解析dict <br> 
      *  
      * @author XXX<br>
@@ -145,6 +175,9 @@ public abstract class AbstractExtProdManager implements Serializable {
         if (aDict.get("id") != null && !"".equals(aDict.get("id"))) {
             this.setProdId((String) aDict.getValueByName("id"));
         }
+        if (aDict.get("userId") != null && !"".equals(aDict.get("userId"))) {
+            this.setUserId((String) aDict.getValueByName("userId"));
+        }
         if (aDict.get("type") != null && !"".equals(aDict.get("type"))) {
             this.setProdType((String) aDict.getValueByName("type"));
         }
@@ -152,6 +185,12 @@ public abstract class AbstractExtProdManager implements Serializable {
             this.setProdType("");
         }
         if (aDict.get("name") != null && !"".equals(aDict.get("name"))) {
+            /*if (String.valueOf(aDict.getValueByName("name")).startsWith("%")) {
+                this.setProdName(URLDecoder.decode((String) aDict.getValueByName("name")));
+            }
+            else {
+                this.setProdName((String) aDict.getValueByName("name"));
+            }*/
             this.setProdName((String) aDict.getValueByName("name"));
         }
         if (aDict.get("prodNew") != null && "true".equals(aDict.get("prodNew"))) {
@@ -228,5 +267,35 @@ public abstract class AbstractExtProdManager implements Serializable {
      * @return ArrayList<HashMap<String, String>>
      * @throws AppException <br>
      */
-    public abstract ArrayList<HashMap<String, String>> queryBasePubsFinalList() throws AppException; 
+    public abstract ArrayList<HashMap<String, String>> queryBasePubsFinalList() throws AppException;
+    
+    /**
+     * Description:查询收藏的产品 <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @return ArrayList<HashMap<String, String>>
+     * @throws AppException <br>
+     */
+    public abstract ArrayList<HashMap<String, String>> queryBaseFavoriteList() throws AppException;
+    /**
+     * Description:移除收藏的产品 <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @return 0
+     * @throws AppException <br>
+     */
+    public abstract int removeFavorite() throws AppException;
+    
+    /**
+     * Description:移除收藏的产品 <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @return 0
+     * @throws AppException <br>
+     */
+    public abstract int addFavorite() throws AppException;
+    
 }

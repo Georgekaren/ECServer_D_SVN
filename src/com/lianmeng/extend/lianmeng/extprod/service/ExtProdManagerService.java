@@ -50,6 +50,7 @@ public class ExtProdManagerService implements IAction {
     @Override
     public int perform(DynamicDict aDict) throws AppException {
         String action = (String) aDict.getValueByName("ACTION");
+        this.extProdManager.clear();
         if (StringUtils.equals(action, "QRYLIMITPROD")) {
             aDict.set("DATA_INFO", this.extProdManager.queryLimitProdList());
             aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "limitBuy");
@@ -101,14 +102,32 @@ public class ExtProdManagerService implements IAction {
             aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "prodValueType");
         }
         else if (StringUtils.equals(action, "QRYPRODTYPELIST")) {
+            
             this.extProdManager.dictToBO(aDict);
             aDict.set("DATA_INFO", this.extProdManager.queryProdTypeList());
             aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "prodType");
         }
         else if (StringUtils.equals(action, "QRYPRODFINALSLIST")) {
             this.extProdManager.dictToBO(aDict);
-            aDict.set("DATA_INFO", this.extProdManager.queryBasePubsFinalList());
+            ArrayList<HashMap<String, String>> basList = this.extProdManager.queryBasePubsFinalList();
+            
+            aDict.set("DATA_INFO", basList);
             aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "prodType");
+        }
+        else if (StringUtils.equals(action, "QRYBASEFAVORITEPROD")) {
+            this.extProdManager.dictToBO(aDict);
+            aDict.set("DATA_INFO", this.extProdManager.queryBaseFavoriteList());
+            aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "favorites"); 
+        }
+        else if (StringUtils.equals(action, "MIMREMOVEFAVORITEPROD")) {
+            this.extProdManager.dictToBO(aDict);
+            this.extProdManager.removeFavorite();
+            aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "removefavorites"); 
+        }
+        else if (StringUtils.equals(action, "MIMADDFAVORITEPROD")) {
+            this.extProdManager.dictToBO(aDict);
+            this.extProdManager.addFavorite();
+            aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "addfavorites"); 
         }
         else {
             aDict.set(ServiceObjectToJsonUtil.RESPONSE_CODE, "extProd");

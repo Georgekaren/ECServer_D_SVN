@@ -316,4 +316,13 @@ public abstract class AbstractAddressManager {
      */ 
     public abstract ArrayList<HashMap<String, String>> qryAddressListByUser() throws AppException;
 
+    /**
+     * Description: <br> 
+     *  
+     * @author XXX<br>
+     * @taskId <br>
+     * @return 0
+     * @throws AppException <br>
+     */ 
+    public abstract int setNoDefault() throws AppException;
 }

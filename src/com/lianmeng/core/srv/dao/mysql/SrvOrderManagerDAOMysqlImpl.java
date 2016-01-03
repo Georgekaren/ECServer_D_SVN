@@ -86,14 +86,25 @@ public class SrvOrderManagerDAOMysqlImpl extends SrvOrderManagerDAO {
     
     
     @Override
-    public ArrayList<HashMap<String, String>> qryBaseCartOrderList(AbstractSrvOrderManager order) throws AppException {
+    public ArrayList<HashMap<String, String>> qryBaseStateOrderList(AbstractSrvOrderManager order) throws AppException {
         ArrayList<String> array = new ArrayList<String>();
         StringBuffer sbf = new StringBuffer();
-        sbf.append(" select a.id orderId,b.id,a.code,b.name,b.price,c.big_pic pic,if(a.isgift=1,'true','false') isgift ");
-        sbf.append(" ,a.prod_num prodNum,a.total_price subtotal,b.stock number,0 uplimit,b.grade ");
-        sbf.append(" from Srv_order a,srv_prod b,im_picture c where a.del_state='0' and a.user_id= ? and a.state='1003001' ");
-        sbf.append(" and a.prod_id=b.id and b.pic_id=c.id ");
+        sbf.append(" select a.code orderId,a.finish_date,a.code orderNo,b.id,a.code,b.name,d.name order_state ");
+        sbf.append(" ,b.price,c.big_pic pic,if(a.isgift=1,'true','false') isgift ,a.addr_id  ");
+        sbf.append(" ,a.prod_num prodNum,a.total_price subtotal,b.stock number,0 uplimit,b.grade,a.logistic_id,a.pay_method ");
+        sbf.append(" from Srv_order a,srv_prod b,im_picture c,pubs_final d where a.del_state='0' and a.user_id= ?  ");
+        sbf.append(" and a.prod_id=b.id and b.pic_id=c.id and a.state=d.id ");
         array.add(order.getUserId());
+        
+        
+        if (order.getOrderCode() != null && !"".equals(order.getOrderCode())) {
+            sbf.append(" and a.code = ? ");
+            array.add(order.getOrderCode());
+        }
+        else if (order.getOrderCode() != null && !"".equals(order.getOrderCode())) {
+            sbf.append(" and a.state= ? ");
+            array.add(order.getState());
+        }
         return this.queryList(sbf.toString(), array);
     }
     
@@ -111,13 +122,24 @@ public class SrvOrderManagerDAOMysqlImpl extends SrvOrderManagerDAO {
     public ArrayList<HashMap<String, String>> qryHasOrderList(AbstractSrvOrderManager order) throws AppException {
         ArrayList<String> array = new ArrayList<String>();
         StringBuffer sbf = new StringBuffer();
-        sbf.append(" select a.id orderId,a.state status,b.id,a.code,b.name,b.price,c.big_pic pic ");
+        sbf.append(" select a.code orderId,a.state status,b.id,a.code,b.name,b.price,c.big_pic pic ");
         sbf.append(" ,if(a.isgift=1,'true','false') isgift,a.prod_num prodNum,date_format(a.create_date,'%Y-%m-%d %H:%i:%s') time,'1' flag ");
-        sbf.append(" ,a.total_price subtotal,b.stock number,0 uplimit,b.grade  ");
+        sbf.append(" ,a.total_price subtotal,b.stock number,0 uplimit,b.grade,a.addr_id  ");
         sbf.append(" from Srv_order a,srv_prod b,im_picture c where a.del_state='0' and a.user_id= ? ");
         sbf.append(" and a.prod_id=b.id and b.pic_id=c.id ");
         array.add(order.getUserId());
         return this.queryList(sbf.toString(), array);
+    }
+    
+    @Override
+    public HashMap<String, String> qryAddressListById(String addressId) throws AppException {
+        ArrayList<String> array = new ArrayList<String>();
+        StringBuffer sbf = new StringBuffer();
+        sbf.append(" select id,name,a.tele_no phonenumber,a.fixed_tele_no fixedtel,a.is_default isdefault,a.province_id provinceid ");
+        sbf.append(" ,a.city_id cityid,a.area_id areaid,a.area_id address_area,a.detail areadetail,a.detail address_detail,a.zipcode ");
+        sbf.append("  from Im_address a where id= ? "); //and a.del_state='0' 
+        array.add(addressId);
+        return this.queryList(sbf.toString(), array).get(0);
     }
 
 }

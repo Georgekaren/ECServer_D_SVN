@@ -119,4 +119,20 @@ public class ExtProdManager extends AbstractExtProdManager {
     public ArrayList<HashMap<String, String>> queryBasePubsFinalList() throws AppException {
         return this.extProdManagerDAO.queryBasePubsFinalList(this);
     }
+    
+    @Override
+    public ArrayList<HashMap<String, String>> queryBaseFavoriteList() throws AppException {
+        return this.extProdManagerDAO.queryBaseFavoriteList(this);
+    }
+    
+    
+    @Override
+    public int removeFavorite() throws AppException {
+        return this.extProdManagerDAO.removeFavorite(this);
+    }
+    
+    @Override
+    public int addFavorite() throws AppException {
+        return this.extProdManagerDAO.addFavorite(this);
+    }
 }

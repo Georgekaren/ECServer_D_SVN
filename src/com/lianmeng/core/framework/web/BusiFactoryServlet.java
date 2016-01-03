@@ -76,6 +76,7 @@ public class BusiFactoryServlet extends HttpServlet {
         serviceId = 0L;
         start = System.currentTimeMillis();
         logger.debug("Runtime层开始执行......");
+        logger.debug("Runtime层requestData:" + requestData);
         try {
             // {"ServiceName":"testJdbcSu" , "Data":{"PROJ_ORD_NO":"CR201512180464"}}
             String jsonString = requestData;
@@ -121,6 +122,7 @@ public class BusiFactoryServlet extends HttpServlet {
         serviceId = 0L;
         start = System.currentTimeMillis();
         logger.debug("Runtime层开始执行......");
+        logger.debug("Runtime层requestData:" + requestData);
         try {
             String jsonString = requestData;
             JSONObject json = ServiceObjectToJsonUtil.toJson(jsonString);
