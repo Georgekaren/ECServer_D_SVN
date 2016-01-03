@@ -29,4 +29,11 @@
     <property name="userManagerDAO" ref="userManagerDAO" ></property>
 </bean>
 
+<bean id="payOrderManager" class="com.lianmeng.core.acco.domain.PayOrderManager" >
+    <property name="payOrderManagerDAO" ref="payOrderManagerDAO" ></property>
+</bean>
+
+<bean id="addressManager" class="com.lianmeng.core.addr.domain.AddressManager" >
+    <property name="addressManagerDAO" ref="addressManagerDAO" ></property>
+</bean>
 </beans>

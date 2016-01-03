@@ -29,5 +29,13 @@
     <property name="userManager" ref="userManager" ></property>
 </bean>
 
+<bean id="payOrderManagerService" class="com.lianmeng.core.acco.service.PayOrderManagerService" >
+    <property name="payOrderManager" ref="payOrderManager" ></property>
+</bean>
+
+<bean id="addressManagerService" class="com.lianmeng.core.addr.service.AddressManagerService" >
+    <property name="addressManager" ref="addressManager" ></property>
+</bean>
+
 
 </beans>

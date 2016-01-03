@@ -20,5 +20,8 @@
 </bean>
 <bean id="userManagerDAO" class="com.lianmeng.core.user.dao.mysql.UserManagerDAOMysqlImpl"  parent="baseJdbcSupport">
 </bean>
-
+<bean id="payOrderManagerDAO" class="com.lianmeng.core.acco.dao.mysql.PayOrderManagerDAOMysqlImpl"  parent="baseJdbcSupport">
+</bean>
+<bean id="addressManagerDAO" class="com.lianmeng.core.addr.dao.mysql.AddressManagerDAOMysqlImpl"  parent="baseJdbcSupport">
+</bean>
 </beans>
