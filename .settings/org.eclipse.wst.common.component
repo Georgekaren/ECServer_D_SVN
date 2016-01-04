@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ECServer_D">
+    <wb-module deploy-name="LianMengTradServer">
         <wb-resource deploy-path="/" source-path="/WebRoot"/>
         <property name="context-root" value="/ECServer_D"/>
-        <property name="java-output-path" value="/ECServer_D/WebRoot/WEB-INF/classes"/>
+        <property name="java-output-path" value="/LianMengTradServer/WebRoot/WEB-INF/classes"/>
     </wb-module>
 </project-modules>
